@@ -12,7 +12,7 @@
 #include <stdio.h>
 
 
-TaskHandle_t gMgcTaskHandle, gReportTaskHandle;
+TaskHandle_t gMgcTaskHandle, gReportTaskHandle, gLightTaskHandle;
 QueueHandle_t gKeyCodeQueueHandle, gLightColorQueue;
 
 int _write(int file, char *ptr, int len);
@@ -51,7 +51,7 @@ int main(void)
 
 	/* Start Light Task */
 	xTaskCreate(do_light_task, (const char*) "light", configMINIMAL_STACK_SIZE,
-				NULL, configMAX_PRIORITIES - 2, gReportTaskHandle);
+				NULL, configMAX_PRIORITIES - 2, gLightTaskHandle);
 
 	vTaskStartScheduler();
 	/* Infinite loop */

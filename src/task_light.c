@@ -12,6 +12,9 @@ int16_t i2c_read_lightning(uint8_t reg, uint8_t *data, int len);
 
 void do_light_task(void *pvParameters)
 {
+	uint8_t lightColor[LIGHT_COLOR_DATA_LEN];
+	BaseType_t ret;
+
 	// Waiting for i2c & lightning module(lp55231) init
 	vTaskDelay(200);
 
@@ -20,11 +23,11 @@ void do_light_task(void *pvParameters)
 	while(1)
 	{
 		//wait queue color value
-		ret = xQueueReceive( gKeyCodeQueueHandle, (void*)data, portMAX_DELAY );
-				 if(ret != pdTRUE ) {
-					 LOG_ERR("xQueueReceive fail\n");
-					 continue;
-				 }
+		ret = xQueueReceive( gLightColorQueue, (void*)lightColor, portMAX_DELAY );
+		if (ret != pdTRUE) {
+			//LOG_ERR("xQueueReceive fail\n");
+			continue;
+		}
 
 
 	}

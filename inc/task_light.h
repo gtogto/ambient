@@ -8,6 +8,8 @@
 #ifndef INC_TASK_LIGHT_H_
 #define INC_TASK_LIGHT_H_
 
+#include "FreeRTOS.h"
+#include "queue.h"
 #include "em_i2c.h"
 #include "lp55231.h"
 
