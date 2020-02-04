@@ -24,20 +24,25 @@ int main(void)
 
 	/* Peripherals Init */
 	enter_DefaultMode_from_RESET();
+	// Enable USART Interrupt
+	USART_IntClear(USART1, USART_IF_RXDATAV);
+	NVIC_ClearPendingIRQ(USART1_RX_IRQn);
+	USART_IntEnable(USART1, USART_IEN_RXDATAV);
+	NVIC_EnableIRQ(USART1_RX_IRQn);
 
 	/* Init variables */
 	gMgcTaskHandle = NULL;
 	gReportTaskHandle = NULL;
 
 	/* Creating key code queue */
-	gLightColorQueue = xQueueCreate(GEST_UART_DATA_LEN, 52);
+	gKeyCodeQueueHandle = xQueueCreate(20, GEST_UART_DATA_LEN);
 	if (gKeyCodeQueueHandle == NULL) {
-		LOG_ERR("Queue Create fail\n");
+		LOG_ERR("Queue Create fail 0\n");
 		return 0;
 	}
-	gKeyCodeQueueHandle = xQueueCreate(10, LIGHT_COLOR_DATA_LEN);
-	if (gKeyCodeQueueHandle == NULL) {
-		LOG_ERR("Queue Create fail\n");
+	gLightColorQueue = xQueueCreate(10, LIGHT_COLOR_DATA_LEN);
+	if (gLightColorQueue == NULL) {
+		LOG_ERR("Queue Create fail 1\n");
 		return 0;
 	}
 

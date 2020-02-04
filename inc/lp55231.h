@@ -127,7 +127,7 @@ int16_t	(*i2c_read_reg_fptr)(uint8_t regAddr, uint8_t *pData, int16_t len);
 
 
 // Function Prototype
-void lp_init(int16_t (*wf)(uint8_t, uint8_t, uint8_t*, int16_t), int16_t (*rf)(uint8_t, uint8_t, uint8_t*, int16_t));
+void lp_init(int16_t (*wf)(uint8_t, uint8_t*, int16_t), int16_t (*rf)(uint8_t, uint8_t*, int16_t));
 void lp_enable_chip(void);
 void lp_disable_chip(void);
 void lp_reset_chip(void);
