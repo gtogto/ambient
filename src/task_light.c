@@ -27,8 +27,6 @@ void do_light_task(void *pvParameters)
 	rxTimeoutTimer = xTimerCreate("rxTimeout", pdMS_TO_TICKS(1000), pdTRUE, NULL, cb_rx_timeout);
 
 	rxBuf.idx = 0;
-	vTaskDelay(2000);
-	probe_i2c_addr(I2C0);
 
 	while(1)
 	{
